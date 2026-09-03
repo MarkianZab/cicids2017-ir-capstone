@@ -4,7 +4,7 @@ Team capstone for CodePath's CYB102 cybersecurity course, Summer 2026. We analyz
 CICIDS2017 network intrusion dataset, adapted a CERT incident-response playbook to the attack
 traffic it contains, and presented our findings at Demo Day.
 
-**Slides:** [Final presentation (Google Slides)](https://docs.google.com/presentation/d/1gba2BeBFWIFMluYRmWvGFd2_8iWJ-T5h-JiCsGcFps0/view) | [PDF copy](./CYB102-CICIDS2017-slides.pdf)
+**Slides:** [Final presentation (Google Slides)](https://docs.google.com/presentation/d/1rxDUZafnZgzVUvMTxZp4zPd7LLGjSjr6rqLBlJ-jNkk/view) | [PDF copy](./CYB102-CICIDS2017-slides.pdf)
 
 ## What we did
 
@@ -50,7 +50,7 @@ through the incident lifecycle:
 
 ## Repository contents
 
-|| File | Description |
+| File | Description |
 |------|-------------|
 | `CYB102-CICIDS2017-slides.pdf` | Final Demo Day presentation (16 slides) |
 
