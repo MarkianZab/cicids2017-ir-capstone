@@ -50,12 +50,9 @@ through the incident lifecycle:
 
 ## Repository contents
 
-| File | Description |
+|| File | Description |
 |------|-------------|
-| `slides.pdf` | Final Demo Day presentation |
-| `playbook.md` | CERT IRM-4 DDoS playbook, customized for CICIDS2017 |
-| `tools.md` | Tooling evaluation: tcpdump, Wireshark/Tshark, Snort, NetFlow, Ntop |
-| `impact-and-triage.md` | Impact analysis and triage / case management design |
+| `CYB102-CICIDS2017-slides.pdf` | Final Demo Day presentation (16 slides) |
 
 ## Team and my role
 
