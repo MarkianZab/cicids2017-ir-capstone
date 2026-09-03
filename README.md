@@ -4,7 +4,7 @@ Team capstone for CodePath's CYB102 cybersecurity course, Summer 2026. We analyz
 CICIDS2017 network intrusion dataset, adapted a CERT incident-response playbook to the attack
 traffic it contains, and presented our findings at Demo Day.
 
-**Slides:** [Final presentation (PDF)](./slides.pdf)
+**Slides:** [Final presentation (Google Slides)](https://docs.google.com/presentation/d/1gba2BeBFWIFMluYRmWvGFd2_8iWJ-T5h-JiCsGcFps0/view) | [PDF copy](./slides.pdf)
 
 ## What we did
 
@@ -14,10 +14,13 @@ botnet, infiltration). We treated it as if it were traffic from a real organizat
 through the incident lifecycle:
 
 1. **Preparation.** Selected the dataset, defined scope, and chose the CERT Société Générale
-   IRM-4 (DDoS) incident response playbook as our baseline. We then customized the playbook for
-   the attack patterns present in CICIDS2017 rather than using it as-is.
-2. **Detection and analysis.** Loaded the flow-level CSVs into Splunk and tested three
-   hypotheses about the attack traffic: [HYPOTHESIS 1], [HYPOTHESIS 2], [HYPOTHESIS 3].
+   IRM-4 (DDoS) incident response playbook as our baseline, with CISA and NIST guidance as
+   references. We then customized the playbook for the attack patterns present in CICIDS2017
+   rather than using it as-is.
+2. **Detection and analysis.** Loaded the CICFlowMeter CSVs into Splunk and tested three
+   hypotheses about the attack traffic: (1) malicious traffic volume significantly exceeds
+   benign traffic, (2) attacks target only a few systems or services, and (3) attack activity
+   occurs in predictable time windows.
 3. **Tooling.** Evaluated and documented the tools an analyst would use on this traffic:
    tcpdump, Wireshark/Tshark, Snort, NetFlow, and Ntop, with notes on what each is good for at
    which stage of the investigation.
@@ -29,9 +32,21 @@ through the incident lifecycle:
 
 ## Key findings
 
-- [FINDING 1: e.g. which attack class dominated the dataset and how it showed up in Splunk]
-- [FINDING 2: e.g. which hypothesis was confirmed or rejected, and by what evidence]
-- [FINDING 3: e.g. a detection gap in the original playbook that the customized version closes]
+- **One host absorbed almost everything.** The web server (192.168.10.50) received 555,630 of
+  557,646 malicious events (99.6%). By volume: Hulk DoS (231,073, port 80), PortScan (158,930,
+  many ports), DDoS (128,024, port 80), FTP-Patator (7,937, port 21), SSH-Patator (5,897, port 22).
+- **All three hypotheses were only partially true.** Volume-based detection catches Hulk and
+  FTP-Patator but misses low-rate attacks like Slowloris; attacks concentrated on one host but
+  spread across many services on it (roughly 1,000 ports probed on a single IP); scheduled
+  attacks fell in predictable windows, but botnet C2 traffic ran as prolonged low-level activity
+  outside them.
+- **Two Splunk queries drove the investigation:** one grouping malicious events by destination
+  asset, one linking the web server to specific attack labels and service ports, so analysis
+  targeted the affected host instead of searching blindly.
+- **Remediation was mapped per attack class:** rate limiting, lockouts, and key-based SSH for
+  brute force; upstream protection, connection limits, and volume alerts for DoS/DDoS; closing
+  unused ports, firewall rules, and segmentation for scans; endpoint isolation and C2/DNS
+  monitoring for botnet activity.
 
 ## Repository contents
 
